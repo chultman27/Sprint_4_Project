@@ -9,7 +9,7 @@ import streamlit as st
 import matplotlib as plt
 
 #import data set 
-uaps = pd.read_csv('/Users/corinnehultman/Desktop/TripleTen/Sprint_4_Project/ufo_sightings_scrubbed.csv', low_memory=False) 
+uaps = pd.read_csv('ufo_sightings_scrubbed.csv', low_memory=False) 
 
 #Write a header for the application
 st.title('Sprint 4 Project: UFO/UAP Sighting Analysis')
