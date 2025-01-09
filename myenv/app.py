@@ -59,8 +59,27 @@ uaps_us = uaps_us.dropna(subset=['shape'])
 #missing values in 'comments' column
 uaps_us['comments']= uaps_us['comments'].fillna('no_comment')
 
-##Question 1 info
-st.header('Which Year are the Number of UAP Sightings the Highest?')
+#Question 1 info
+st.header('Which State Reported the Highest number of UAP sightings from 1910-2014?')
+
+#group the rows by state and count the number of rows
+uaps_state_group = uaps_us.groupby('state').size().reset_index(name='count')
+#sort results in descending order
+uaps_state_group = uaps_state_group.sort_values(by='count', ascending=False)
+#create a graphic describing the distribution of sightings across states --> bar graph: discrete data
+#create bargraph via plotly.express
+fig_bar1 = px.bar(uaps_state_group, x='state', y='count', title='UAP Sightings per U.S State from 1910-2014')
+fig_bar1.update_traces(marker_color='green')
+fig_bar1.update_layout(
+    xaxis_title='State (abbreviation)',
+    yaxis_title='UAP Sighting Count',
+    title_font=dict(family="Arial", size=24, color="black"),
+    font=dict(family="Arial", size=14, color="black") )
+#show figure in streamlit
+st.plotly_chart(fig_bar1)
+
+##Question 2 info
+st.header('Which Year has the Highest Number of UAP Sightings?')
 
 #which year was the number of sightings highest?
 #create year column
