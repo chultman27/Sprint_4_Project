@@ -89,6 +89,18 @@ uaps_year_group = uaps_us.groupby('year').size().reset_index(name='count')
 #sort results in descending order
 uaps_year_group = uaps_year_group.sort_values(by='count', ascending=False)
 
+##create checklist for year
+# Create checkboxes for each year
+years = uaps_year_group['year'].unique()
+selected_years = []
+
+for year in years:
+    if st.checkbox(f"Show {year}", value=True):
+        selected_years.append(year)
+
+# Filter the data to include only selected years
+uaps_year_group = uaps_year_group[uaps_year_group['year'].isin(selected_years)]
+
 #making a histogram of data
 #make sure df is sort chronologcally
 uaps_year_group['year'] = pd.to_numeric(uaps_year_group['year'])
